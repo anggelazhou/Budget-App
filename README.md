@@ -14,3 +14,12 @@ App Info
 >
 > Essentially, this program takes a budget and expenses, and provides a balance. Users are able to create categories (such as groceries, gas, etc.), and are given a general overview of the balances left for each one. When a category is selected, users are able to view previous expenses within the category, as well as will be given the option to add another expense.
 
+<br>
+
+User Stories
+> - As a user, I want to be able to add and remove a category
+> - As a user, I want to be able to add a budget (for a category, for the month)
+> - As a user, I want to be able to modify a budget (before the month ends)
+> - As a user, I want to be able to have a general view of my categories and their balances
+> - As a user, I want to be able to select a category and view the previous expenses in detail (from the month)
+> - As a user, I want to be able to add an expense (includes expense title and value, listed under a category)

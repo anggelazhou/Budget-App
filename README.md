@@ -18,8 +18,13 @@ App Info
 
 User Stories
 > - As a user, I want to be able to add and remove a category
-> - As a user, I want to be able to add a budget (for a category, for the month)
-> - As a user, I want to be able to modify a budget (before the month ends)
+> - As a user, I want to be able to add a budget (for a category)
+> - As a user, I want to be able to view the number of days left in the period/month (same for all the categories)
+> - As a user, I want to be able to modify a budget
 > - As a user, I want to be able to have a general view of my categories and their balances
 > - As a user, I want to be able to select a category and view the previous expenses in detail (from the month)
 > - As a user, I want to be able to add an expense (includes expense title and value, listed under a category)
+
+<br>
+
+ Having a history of previous expenses would be helpful in creating graphs/comparisons. *However, in this version of the program, history is not considered (for simplicity's sake).*

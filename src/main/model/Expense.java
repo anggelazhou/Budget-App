@@ -4,7 +4,7 @@ public class Expense {
     private final String description;
     private final double amount;
 
-    // REQUIRES: amount >= 0
+    // REQUIRES: amount >= 0, description is not of 0 length
     // EFFECTS: constructs an expense with given description and amount
     public Expense(String description, double amount) {
         this.description = description;

@@ -8,7 +8,7 @@ public class Category {
     private double budget;
     private final List<Expense> expenses;
 
-    // REQUIRES: budget >= 0
+    // REQUIRES: budget >= 0, name is not of 0 length
     // EFFECTS: constructs a category with a given name and budget
     public Category(String name, double budget) {
         this.name = name;

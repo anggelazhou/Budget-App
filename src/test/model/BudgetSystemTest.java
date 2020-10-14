@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Unit tests for BudgetSystem class
 class BudgetSystemTest {
     private BudgetSystem testBudgetSystem;
 

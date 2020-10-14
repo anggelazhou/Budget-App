@@ -7,10 +7,12 @@ import java.util.List;
 public class BudgetSystem {
     private final List<Category> categories;
 
+    // EFFECTS: constructs a budget system with no categories
     public BudgetSystem() {
         this.categories = new ArrayList<>();
     }
 
+    // EFFECTS: returns categories in budget system
     public List<Category> getCategories() {
         return categories;
     }
@@ -18,7 +20,7 @@ public class BudgetSystem {
     /*
      * REQUIRES: category must not already exist
      * MODIFIES: this
-     * EFFECTS:
+     * EFFECTS: adds a new category to the budget system
      */
     public void addCategory(Category category) {
         categories.add(category);
@@ -26,8 +28,8 @@ public class BudgetSystem {
 
     /*
      * MODIFIES: this
-     * EFFECTS: If there exists a category with provided name,
-     * removes category from list returns true. Otherwise, returns false
+     * EFFECTS: If there exists a category in the budget system with the provided name,
+     * removes category from the list and returns true. Otherwise, returns false.
      */
     public boolean removeCategory(String name) {
         for (Category c : categories) {
@@ -41,7 +43,7 @@ public class BudgetSystem {
 
     /*
      * MODIFIES: this
-     * EFFECTS: returns category with given name if found. Otherwise, returns null.
+     * EFFECTS: Returns category with given name if found. Otherwise, returns null.
      */
     public Category selectCategory(String name) {
         for (Category c : categories) {

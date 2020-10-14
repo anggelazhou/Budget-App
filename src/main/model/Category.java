@@ -8,20 +8,25 @@ public class Category {
     private double budget;
     private final List<Expense> expenses;
 
+    // REQUIRES: budget >= 0
+    // EFFECTS: constructs a category with a given name and budget
     public Category(String name, double budget) {
         this.name = name;
         this.budget = budget;
         this.expenses = new ArrayList<>();
     }
 
+    // EFFECTS: returns name of category
     public String getName() {
         return name;
     }
 
+    // EFFECTS: returns budget of category
     public double getBudget() {
         return budget;
     }
 
+    // EFFECTS: sets budget of category
     public void setBudget(double budget) {
         this.budget = budget;
     }
@@ -31,7 +36,7 @@ public class Category {
     }
 
     /*
-     * REQUIRES: the expense is a positive value (i.e. no negative prices)
+     * REQUIRES: expense >= 0
      * MODIFIES: this
      * EFFECTS: adds an expense to a category
      */
@@ -54,7 +59,7 @@ public class Category {
 
     /*
      * MODIFIES: this
-     * EFFECTS: clears previous expenses within a category, which also resets balance to original budget
+     * EFFECTS: clears previous expenses within a category, which resets balance to original budget
      */
     public void resetBalance() {
         expenses.clear();

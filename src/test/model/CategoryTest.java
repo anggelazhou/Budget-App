@@ -36,6 +36,9 @@ public class CategoryTest {
         testCategory.addExpense(new Expense("Apples", 5.0));
         assertEquals(183, testCategory.calculateBalance());
 
+        testCategory.addExpense(new Expense("Caviar", 183.0));
+        assertEquals(0, testCategory.calculateBalance());
+
     }
 
     @Test

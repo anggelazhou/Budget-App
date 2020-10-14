@@ -26,8 +26,8 @@ public class BudgetSystem {
 
     /*
      * MODIFIES: this
-     * EFFECTS: If there exists a category with provided
-     *  name, removes category from list returns true. Otherwise, returns false
+     * EFFECTS: If there exists a category with provided name,
+     * removes category from list returns true. Otherwise, returns false
      */
     public boolean removeCategory(String name) {
         for (Category c : categories) {

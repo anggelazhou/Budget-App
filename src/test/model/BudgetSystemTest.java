@@ -30,8 +30,10 @@ class BudgetSystemTest {
 
         testBudgetSystem.addCategory(new Category("Food", 200.0));
         testBudgetSystem.addCategory(new Category("Clothes", 120.0));
+        assertNotNull(testBudgetSystem.selectCategory("Food"));
         assertTrue(testBudgetSystem.removeCategory("Food"));
         assertEquals(1, testBudgetSystem.getCategories().size());
+        assertNull(testBudgetSystem.selectCategory("Food"));
         assertTrue(testBudgetSystem.removeCategory("Clothes"));
         assertTrue(testBudgetSystem.getCategories().isEmpty());
     }

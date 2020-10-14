@@ -38,6 +38,7 @@ class BudgetSystemTest {
         assertTrue(testBudgetSystem.removeCategory("Food"));
         assertEquals(1, testBudgetSystem.getCategories().size());
         assertNull(testBudgetSystem.selectCategory("Food"));
+        assertFalse(testBudgetSystem.removeCategory("Gas"));
         assertTrue(testBudgetSystem.removeCategory("Clothes"));
         assertTrue(testBudgetSystem.getCategories().isEmpty());
     }

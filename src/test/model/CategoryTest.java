@@ -19,8 +19,11 @@ public class CategoryTest {
     void testAddExpense() {
         assertTrue(testCategory.getExpenses().isEmpty());
 
-        testCategory.addExpense(new Expense("Pizza", 12.0));
+        Expense pizzaExpense = new Expense("Pizza", 12.0);
+        testCategory.addExpense(pizzaExpense);
         assertFalse(testCategory.getExpenses().isEmpty());
+        assertEquals("Pizza", pizzaExpense.getDescription());
+        assertEquals(12.0, pizzaExpense.getAmount());
 
         testCategory.addExpense(new Expense("Coke", 3.0));
         assertEquals(2, testCategory.getExpenses().size());

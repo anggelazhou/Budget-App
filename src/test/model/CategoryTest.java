@@ -65,7 +65,7 @@ public class CategoryTest {
 
 
     @Test
-    void testResetBalanceBalancePositive() {
+    void testResetBalanceWhenBalancePositive() {
         //no expenses
         testCategory.resetBalance();
         assertEquals(200, testCategory.calculateBalance());
@@ -85,7 +85,7 @@ public class CategoryTest {
     }
 
     @Test
-    void testResetBalanceWithNegativeBalance() {
+    void testResetBalanceWhenBalanceNegative() {
         //one expense, expenses just over budget
         testCategory.addExpense(new Expense("Champagne", 201.0));
         assertEquals(-1, testCategory.calculateBalance());

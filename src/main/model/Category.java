@@ -1,42 +1,21 @@
 package model;
 
-import sun.util.resources.LocaleData;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
     private final String name;
-    private final int year;
-    private final int month;
     private double budget;
     private final List<Expense> expenses;
 
-    // for history of budgets
-    public Category(String name, int year, int month, double budget) {
+    public Category(String name, double budget) {
         this.name = name;
-        this.year = year;
-        this.month = month;
         this.budget = budget;
         this.expenses = new ArrayList<>();
     }
 
-    // for current budgets
-    public Category(String name, double budget) {
-        this(name, LocalDate.now().getYear(), LocalDate.now().getMonthValue(), budget);
-    }
-
     public String getName() {
         return name;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getMonth() {
-        return month;
     }
 
     public double getBudget() {
@@ -52,13 +31,33 @@ public class Category {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: the expense is a positive value (i.e. no negative prices)
+     * MODIFIES: this
+     * EFFECTS: adds an expense to a category
      */
     public void addExpense(Expense expense) {
         expenses.add(expense);
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: calculates amount you have left to spend in certain category given a budget and expenses;
+     * budget is negative if expenses exceeds budget
+     */
+    public double calculateBalance() {
+        double balance = budget;
+        for (Expense e : expenses) {
+            balance -= e.getAmount();
+        }
+        return balance;
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: clears previous expenses within a category, which also resets balance to original budget
+     */
+    public void resetBalance() {
+        expenses.clear();
+    }
 
 }

@@ -15,7 +15,7 @@ class BudgetSystemTest {
     }
 
     @Test
-    void addCategory() {
+    void testAddCategory() {
         assertTrue(testBudgetSystem.getCategories().isEmpty());
 
         testBudgetSystem.addCategory(new Category("Food", 200.0));
@@ -26,9 +26,12 @@ class BudgetSystemTest {
     }
 
     @Test
-    void removeCategory() {
+    void testRemoveCategoryWhenBudgetSystemEmpty() {
         assertFalse(testBudgetSystem.removeCategory("Food"));
+    }
 
+    @Test
+    void testRemoveCategoryWhenBudgetSystemNotEmpty() {
         testBudgetSystem.addCategory(new Category("Food", 200.0));
         testBudgetSystem.addCategory(new Category("Clothes", 120.0));
         assertNotNull(testBudgetSystem.selectCategory("Food"));
@@ -40,9 +43,12 @@ class BudgetSystemTest {
     }
 
     @Test
-    void selectCategory() {
+    void testSelectCategoryWhenBudgetSystemEmpty() {
         assertNull(testBudgetSystem.selectCategory("Gas"));
+    }
 
+    @Test
+    void testSelectCategoryWhenBudgetSystemNotEmpty() {
         Category gasCategory = new Category("Gas", 100.0);
         Category clothesCategory = new Category("Clothes", 120.0);
         testBudgetSystem.addCategory(gasCategory);

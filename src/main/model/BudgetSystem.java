@@ -37,7 +37,9 @@ public class BudgetSystem {
                 categories.remove(c);
                 return true;
             }
+
         }
+
         return false;
     }
 

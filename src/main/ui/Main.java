@@ -30,7 +30,8 @@ public class Main {
     }
 
     private static void removeCategory(BudgetSystem myBudgets) {
-        System.out.print("Please enter category name: (b = go back)");
+        System.out.println("-----------------------------");
+        System.out.print("Please enter category name (b = go back): ");
         Scanner input = new Scanner(System.in);
         String categoryName = input.nextLine();
 
@@ -43,7 +44,8 @@ public class Main {
     }
 
     private static void addCategory(BudgetSystem myBudgets) {
-        System.out.print("Please enter category name: (b = go back)");
+        System.out.println("-----------------------------");
+        System.out.print("Please enter category name (b = go back): ");
         Scanner input = new Scanner(System.in);
         String categoryName = input.nextLine();
 
@@ -51,7 +53,7 @@ public class Main {
             return;
         }
 
-        System.out.println("Please enter category budget: ");
+        System.out.print("Please enter category budget: ");
         double budget = input.nextDouble();
 
         Category category = new Category(categoryName, budget);
@@ -61,6 +63,21 @@ public class Main {
     }
 
     private static int budgetSystemChoice(BudgetSystem budgetSystem) {
+        displayBudgetSystemContent(budgetSystem);
+
+        displayChoices("1 = Select Category", "2 = Add Category", "3 = Remove Category");
+
+        Scanner input = new Scanner(System.in);
+        int userChoice = input.nextInt();
+
+        while (userChoice > 3 || userChoice < 0) {
+            System.out.print("Error. Please re-enter: ");
+            userChoice = input.nextInt();
+        }
+        return userChoice;
+    }
+
+    private static void displayBudgetSystemContent(BudgetSystem budgetSystem) {
         System.out.println("Categories: ");
         System.out.println();
 
@@ -74,28 +91,22 @@ public class Main {
                 System.out.println();
             }
         }
+    }
 
-        System.out.println("Choices: ");
+    private static void displayChoices(String s, String s2, String s3) {
         System.out.println("-----------------------------");
-        System.out.println("1 = Select Category");
-        System.out.println("2 = Add Category");
-        System.out.println("3 = Remove Category");
+        System.out.println("Choices: ");
+        System.out.println(s);
+        System.out.println(s2);
+        System.out.println(s3);
         System.out.println("0 = Exit");
         System.out.println();
         System.out.print("Enter choice: ");
-
-        Scanner input = new Scanner (System.in);
-        int userChoice = input.nextInt();
-
-        while (userChoice > 3 || userChoice < 0) {
-            System.out.print("Error. Please re-enter: ");
-            userChoice = input.nextInt();
-        }
-        return userChoice;
     }
 
-    private static void selectCategoryChoice (BudgetSystem budgetSystem) {
+    private static void selectCategoryChoice(BudgetSystem budgetSystem) {
 
+        System.out.println("-----------------------------");
         System.out.print("Please enter category name (b = go back): ");
         Scanner input = new Scanner(System.in);
         String categoryName = input.nextLine();
@@ -119,23 +130,13 @@ public class Main {
         }
 
         // extracted a method to shorten
-        int choice = maintainCategory(chosenCategory);
-
-        while (choice != 0) {
-            if (choice == 1) {
-                modifyBudget(chosenCategory);
-            } else if (choice == 2) {
-                addExpense(chosenCategory);
-            } else if (choice == 3) {
-                resetBalance(chosenCategory);
-            }
-            choice = maintainCategory(chosenCategory);
-        }
+        maintainCategory(chosenCategory);
 
     }
 
     private static void modifyBudget(Category chosenCategory) {
-        System.out.println("Please enter new budget: ");
+        System.out.println("-----------------------------");
+        System.out.print("Please enter new budget: ");
 
         Scanner input = new Scanner(System.in);
         double budget = input.nextDouble();
@@ -144,11 +145,12 @@ public class Main {
     }
 
     private static void addExpense(Category chosenCategory) {
-        System.out.println("Please enter expense description: ");
+        System.out.println("-----------------------------");
+        System.out.print("Please enter expense description: ");
         Scanner input = new Scanner(System.in);
         String description = input.nextLine();
 
-        System.out.println("Please enter expense amount: ");
+        System.out.print("Please enter expense amount: ");
         double amount = input.nextDouble();
 
         Expense expense = new Expense(description, amount);
@@ -159,7 +161,32 @@ public class Main {
         chosenCategory.resetBalance();
     }
 
-    private static int maintainCategory(Category chosenCategory) {
+    private static void maintainCategory(Category chosenCategory) {
+        displayCategoryContent(chosenCategory);
+        displayChoices("1 = Modify Budget", "2 = Add Expense", "3 = Reset Balance");
+
+        Scanner input = new Scanner(System.in);
+        int userChoice = input.nextInt();
+
+        while (userChoice > 3 || userChoice < 0) {
+            System.out.print("Error. Please re-enter: ");
+            userChoice = input.nextInt();
+        }
+
+        if (userChoice != 0) {
+            if (userChoice == 1) {
+                modifyBudget(chosenCategory);
+            } else if (userChoice == 2) {
+                addExpense(chosenCategory);
+            } else {
+                resetBalance(chosenCategory);
+            }
+
+            maintainCategory(chosenCategory);
+        }
+    }
+
+    private static void displayCategoryContent(Category chosenCategory) {
         if (chosenCategory.getExpenses().isEmpty()) {
             System.out.println("No expenses yet!");
             System.out.println();
@@ -171,22 +198,5 @@ public class Main {
             }
         }
         System.out.println("Balance: " + chosenCategory.calculateBalance());
-        System.out.println("-----------------------------");
-        System.out.println("Choices: ");
-        System.out.println("1 = Modify Budget");
-        System.out.println("2 = Add Expense");
-        System.out.println("3 = Reset Balance");
-        System.out.println("0 = Exit");
-        System.out.println();
-        System.out.print("Enter choice: ");
-
-        Scanner input = new Scanner(System.in);
-        int userChoice = input.nextInt();
-
-        while (userChoice > 3 || userChoice < 0) {
-            System.out.print("Error. Please re-enter: ");
-            userChoice = input.nextInt();
-        }
-        return userChoice;
     }
 }

@@ -41,6 +41,11 @@ public class Main {
 
     }
 
+    /*
+     * REQUIRES: budget system must exist (not be null)
+     * MODIFIES: ./data/appBudgetSystem.json
+     * EFFECTS: saves data to the json file if user selects yes
+     */
     private static void saveIfNeeded(BudgetSystem myBudgets) throws FileNotFoundException {
         System.out.println("-----------------------------");
         System.out.println("Would you like to save?");
@@ -66,11 +71,20 @@ public class Main {
         }
     }
 
+    /*
+     * REQUIRES: json file must exist
+     * EFFECTS: returns previous saved budget system
+     */
     private static BudgetSystem loadPreviousBudgetSystem() throws IOException {
         JsonReader reader = new JsonReader("./data/appBudgetSystem.json");
         return reader.read();
     }
 
+    /*
+     * REQUIRES: budget system must exist (not be null)
+     * MODIFIES: myBudget
+     * EFFECTS: removes chosen category in budget system
+     */
     private static void removeCategory(BudgetSystem myBudgets) {
         System.out.println("-----------------------------");
         System.out.print("Please enter category name (b = go back): ");
@@ -85,6 +99,11 @@ public class Main {
 
     }
 
+    /*
+     * REQUIRES: budget system must exist (not be null)
+     * MODIFIES: myBudget
+     * EFFECTS: adds given category to budget system
+     */
     private static void addCategory(BudgetSystem myBudgets) {
         System.out.println("-----------------------------");
         System.out.print("Please enter category name (b = go back): ");
@@ -104,6 +123,10 @@ public class Main {
 
     }
 
+    /*
+     * REQUIRES: budget system must exist (not be null)
+     * EFFECTS: returns user's choice from budget system choices
+     */
     private static int budgetSystemChoice(BudgetSystem budgetSystem) {
         displayBudgetSystemContent(budgetSystem);
 
@@ -120,6 +143,10 @@ public class Main {
         return userChoice;
     }
 
+    /*
+     * REQUIRES: budget system must exist (not be null)
+     * EFFECTS: displays content of budget system
+     */
     private static void displayBudgetSystemContent(BudgetSystem budgetSystem) {
         System.out.println("-----------------------------");
         System.out.println("Categories: ");
@@ -137,6 +164,9 @@ public class Main {
         }
     }
 
+    /*
+     * EFFECTS: displays choices for user to select from
+     */
     private static void displayChoices(String s1, String s2, String s3, String s4) {
         System.out.println("-----------------------------");
         System.out.println("Choices: ");
@@ -151,6 +181,10 @@ public class Main {
         System.out.print("Enter choice: ");
     }
 
+    /*
+     * REQUIRES: budget system must exist (not be null)
+     * EFFECTS: reads user input and performs chosen task
+     */
     private static void selectCategoryChoice(BudgetSystem budgetSystem) {
 
         System.out.println("-----------------------------");
@@ -180,7 +214,11 @@ public class Main {
         maintainCategory(chosenCategory);
 
     }
-
+    /*
+     * REQUIRES: chosen category must exist
+     * MODIFIES: chosenCategory
+     * EFFECTS: modifies budget of selected category
+     */
     private static void modifyBudget(Category chosenCategory) {
         System.out.println("-----------------------------");
         System.out.print("Please enter new budget: ");
@@ -191,6 +229,11 @@ public class Main {
         chosenCategory.setBudget(budget);
     }
 
+    /*
+     * REQUIRES: chosen category must exist
+     * MODIFIES: chosenCategory
+     * EFFECTS: adds expense to selected category
+     */
     private static void addExpense(Category chosenCategory) {
         System.out.println("-----------------------------");
         System.out.print("Please enter expense description: ");
@@ -204,10 +247,20 @@ public class Main {
         chosenCategory.addExpense(expense);
     }
 
+    /*
+     * REQUIRES: chosen category must exist
+     * MODIFIES: chosenCategory
+     * EFFECTS: resets budget of selected category
+     */
     private static void resetBalance(Category chosenCategory) {
         chosenCategory.resetBalance();
     }
 
+    /*
+     * REQUIRES: chosen category must exist
+     * MODIFIES: chosenCategory
+     * EFFECTS: helper function, actually performs selected task for selected category
+     */
     private static void maintainCategory(Category chosenCategory) {
         displayCategoryContent(chosenCategory);
         displayChoices("1 = Modify Budget", "2 = Add Expense", "3 = Reset Balance", "");
@@ -233,6 +286,10 @@ public class Main {
         }
     }
 
+    /*
+     * REQUIRES: chosen category must exist
+     * EFFECTS: displays content of all categories
+     */
     private static void displayCategoryContent(Category chosenCategory) {
         if (chosenCategory.getExpenses().isEmpty()) {
             System.out.println("No expenses yet!");

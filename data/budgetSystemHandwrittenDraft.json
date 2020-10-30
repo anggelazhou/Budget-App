@@ -1,0 +1,37 @@
+{
+  "categories": [
+    {
+      "name": "Food",
+      "budget": "100",
+      "expenses": [
+        {
+          "description": "Burger",
+          "amount": "6"
+        },
+        {
+          "description": "Cereal",
+          "amount": "5"
+        }
+      ]
+    },
+    {
+      "name": "Car",
+      "budget": "150",
+      "expenses": [
+        {
+          "description": "gas",
+          "amount": "30"
+        },
+        {
+          "description": "car wash",
+          "amount": "20"
+        },
+        {
+          "description": "car part",
+          "amount": "50"
+        }
+      ]
+    }
+  ],
+  "name": "Budget System 1"
+}

@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONObject;
+
+// Represents an expense (within a class) having a description and amount
 public class Expense {
     private final String description;
     private final double amount;
@@ -19,5 +22,12 @@ public class Expense {
     // EFFECTS: returns expense amount
     public double getAmount() {
         return amount;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("description", description);
+        json.put("amount", amount);
+        return json;
     }
 }

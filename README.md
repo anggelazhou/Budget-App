@@ -24,6 +24,8 @@ User Stories
 > - As a user, I want to be able to have a general view of my categories and their balances
 > - As a user, I want to be able to select a category and view the previous expenses in detail
 > - As a user, I want to be able to add an expense (includes expense title and value, listed under a category)
+> - As a user, I want to be able to save my budget system to file
+> - As a user, I want to be able to be able to load my budget system from file
 
 <br>
 

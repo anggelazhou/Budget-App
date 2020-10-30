@@ -1,15 +1,32 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class BudgetSystem {
+// Represents a budget system having a collection of categories
+public class BudgetSystem implements Writable {
+    private String name;
     private final List<Category> categories;
 
     // EFFECTS: constructs a budget system with no categories
-    public BudgetSystem() {
+    public BudgetSystem(String name) {
+        this.name = name;
         this.categories = new ArrayList<>();
+    }
+
+    // EFFECTS: returns name of budget system
+    public String getName() {
+        return name;
+    }
+
+    //EFFECTS: sets name of budget system
+    public void setName(String name) {
+        this.name = name;
     }
 
     // EFFECTS: returns categories in budget system
@@ -54,5 +71,24 @@ public class BudgetSystem {
             }
         }
         return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("categories", categoriesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns categories in this budget system as a JSON array
+    private JSONArray categoriesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Category c : categories) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
     }
 }

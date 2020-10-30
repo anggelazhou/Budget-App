@@ -13,7 +13,12 @@ public class Main {
     private static final int BUDGET_SYSTEM_CHOICE_REMOVE = 3;
 
     public static void main(String[] args) {
-        BudgetSystem myBudgets = new BudgetSystem();
+        System.out.print("Budget System Name: ");
+        Scanner input = new Scanner(System.in);
+        String name = input.nextLine();
+
+        BudgetSystem myBudgets = new BudgetSystem(name);
+
         int choiceFromBudgetSystem = budgetSystemChoice(myBudgets);
         while (choiceFromBudgetSystem != BUDGET_SYSTEM_CHOICE_EXIT) {
             if (choiceFromBudgetSystem == BUDGET_SYSTEM_CHOICE_SELECT) {
@@ -78,6 +83,7 @@ public class Main {
     }
 
     private static void displayBudgetSystemContent(BudgetSystem budgetSystem) {
+        System.out.println("-----------------------------");
         System.out.println("Categories: ");
         System.out.println();
 

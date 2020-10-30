@@ -1,9 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category {
+//Represents a category having a name, a budget, and a list of expenses
+public class Category implements Writable {
     private final String name;
     private double budget;
     private final List<Expense> expenses;
@@ -65,4 +70,25 @@ public class Category {
         expenses.clear();
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("budget", budget);
+        json.put("balance", calculateBalance());
+        json.put("expenses", expensesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns expenses in this category as a JSON array
+    private JSONArray expensesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Expense e : expenses) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
+    }
 }
+

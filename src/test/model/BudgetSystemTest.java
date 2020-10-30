@@ -11,11 +11,14 @@ class BudgetSystemTest {
 
     @BeforeEach
     void runBefore() {
-        testBudgetSystem = new BudgetSystem();
+        testBudgetSystem = new BudgetSystem("Budget System 1");
     }
 
     @Test
     void testAddCategory() {
+        assertEquals("Budget System 1", testBudgetSystem.getName());
+        testBudgetSystem.setName("BS1");
+        assertEquals("BS1", testBudgetSystem.getName());
         assertTrue(testBudgetSystem.getCategories().isEmpty());
 
         testBudgetSystem.addCategory(new Category("Food", 200.0));

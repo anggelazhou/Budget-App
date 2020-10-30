@@ -1,0 +1,29 @@
+{
+    "name": "Angela's BS",
+    "categories": [
+        {
+            "balance": 89,
+            "name": "food",
+            "budget": 100,
+            "expenses": [
+                {
+                    "amount": 6,
+                    "description": "burger"
+                },
+                {
+                    "amount": 5,
+                    "description": "drink"
+                }
+            ]
+        },
+        {
+            "balance": 90,
+            "name": "car",
+            "budget": 150,
+            "expenses": [{
+                "amount": 60,
+                "description": "gas"
+            }]
+        }
+    ]
+}

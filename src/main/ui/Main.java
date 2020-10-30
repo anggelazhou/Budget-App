@@ -3,6 +3,7 @@ package ui;
 import model.BudgetSystem;
 import model.Category;
 import model.Expense;
+import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
@@ -32,7 +33,7 @@ public class Main {
             } else if (choiceFromBudgetSystem == BUDGET_SYSTEM_CHOICE_REMOVE) {
                 removeCategory(myBudgets);
             } else if (choiceFromBudgetSystem == BUDGET_SYSTEM_CHOICE_LOAD_PREV) {
-                loadPreviousBudgetSystem(myBudgets);
+                myBudgets = loadPreviousBudgetSystem();
             }
             choiceFromBudgetSystem = budgetSystemChoice(myBudgets);
         }
@@ -65,8 +66,9 @@ public class Main {
         }
     }
 
-    private static void loadPreviousBudgetSystem(BudgetSystem myBudgets) {
-//
+    private static BudgetSystem loadPreviousBudgetSystem() throws IOException {
+        JsonReader reader = new JsonReader("./data/appBudgetSystem.json");
+        return reader.read();
     }
 
     private static void removeCategory(BudgetSystem myBudgets) {

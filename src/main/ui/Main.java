@@ -34,7 +34,6 @@ public class Main {
             } else if (choiceFromBudgetSystem == BUDGET_SYSTEM_CHOICE_LOAD_PREV) {
                 loadPreviousBudgetSystem(myBudgets);
             }
-            System.out.println();
             choiceFromBudgetSystem = budgetSystemChoice(myBudgets);
         }
         saveIfNeeded(myBudgets);
@@ -66,9 +65,8 @@ public class Main {
         }
     }
 
-    private static void loadPreviousBudgetSystem(BudgetSystem myBudgets) throws IOException {
-//        JsonReader reader = new JsonReader("./data/appBudgetSystem.json");
-//        BudgetSystem myBudgets = reader.read();
+    private static void loadPreviousBudgetSystem(BudgetSystem myBudgets) {
+//
     }
 
     private static void removeCategory(BudgetSystem myBudgets) {
@@ -143,7 +141,7 @@ public class Main {
         System.out.println(s1);
         System.out.println(s2);
         System.out.println(s3);
-        if (null != s4 && s4.length()>0) {
+        if (null != s4 && s4.length() > 0) {
             System.out.println(s4);
         }
         System.out.println("0 = Exit");

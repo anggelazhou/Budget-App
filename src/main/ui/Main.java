@@ -3,7 +3,10 @@ package ui;
 import model.BudgetSystem;
 import model.Category;
 import model.Expense;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -11,8 +14,9 @@ public class Main {
     private static final int BUDGET_SYSTEM_CHOICE_SELECT = 1;
     private static final int BUDGET_SYSTEM_CHOICE_ADD = 2;
     private static final int BUDGET_SYSTEM_CHOICE_REMOVE = 3;
+    private static final int BUDGET_SYSTEM_CHOICE_LOAD_PREV = 4;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.print("Budget System Name: ");
         Scanner input = new Scanner(System.in);
         String name = input.nextLine();
@@ -27,11 +31,44 @@ public class Main {
                 addCategory(myBudgets);
             } else if (choiceFromBudgetSystem == BUDGET_SYSTEM_CHOICE_REMOVE) {
                 removeCategory(myBudgets);
+            } else if (choiceFromBudgetSystem == BUDGET_SYSTEM_CHOICE_LOAD_PREV) {
+                loadPreviousBudgetSystem(myBudgets);
             }
             System.out.println();
             choiceFromBudgetSystem = budgetSystemChoice(myBudgets);
         }
+        saveIfNeeded(myBudgets);
 
+    }
+
+    private static void saveIfNeeded(BudgetSystem myBudgets) throws FileNotFoundException {
+        System.out.println("-----------------------------");
+        System.out.println("Would you like to save?");
+        System.out.println("Y = Yes");
+        System.out.println("N = No");
+        System.out.println();
+        System.out.print("Enter choice: ");
+
+        Scanner input = new Scanner(System.in);
+        String saveInput = input.nextLine();
+
+        //when the category the user inputs does not exist...
+        while (!saveInput.equalsIgnoreCase("Y") && !saveInput.equalsIgnoreCase("N")) {
+            System.out.print("Invalid input. Please re-enter: ");
+            saveInput = input.nextLine();
+        }
+
+        if (saveInput.equalsIgnoreCase("Y")) {
+            JsonWriter writer = new JsonWriter("./data/appBudgetSystem.json");
+            writer.open();
+            writer.write(myBudgets);
+            writer.close();
+        }
+    }
+
+    private static void loadPreviousBudgetSystem(BudgetSystem myBudgets) throws IOException {
+//        JsonReader reader = new JsonReader("./data/appBudgetSystem.json");
+//        BudgetSystem myBudgets = reader.read();
     }
 
     private static void removeCategory(BudgetSystem myBudgets) {
@@ -70,12 +107,13 @@ public class Main {
     private static int budgetSystemChoice(BudgetSystem budgetSystem) {
         displayBudgetSystemContent(budgetSystem);
 
-        displayChoices("1 = Select Category", "2 = Add Category", "3 = Remove Category");
+        displayChoices("1 = Select Category", "2 = Add Category",
+                "3 = Remove Category", "4 = Load Previous Budget System");
 
         Scanner input = new Scanner(System.in);
         int userChoice = input.nextInt();
 
-        while (userChoice > 3 || userChoice < 0) {
+        while (userChoice > 4 || userChoice < 0) {
             System.out.print("Error. Please re-enter: ");
             userChoice = input.nextInt();
         }
@@ -99,12 +137,15 @@ public class Main {
         }
     }
 
-    private static void displayChoices(String s, String s2, String s3) {
+    private static void displayChoices(String s1, String s2, String s3, String s4) {
         System.out.println("-----------------------------");
         System.out.println("Choices: ");
-        System.out.println(s);
+        System.out.println(s1);
         System.out.println(s2);
         System.out.println(s3);
+        if (null != s4 && s4.length()>0) {
+            System.out.println(s4);
+        }
         System.out.println("0 = Exit");
         System.out.println();
         System.out.print("Enter choice: ");
@@ -169,7 +210,7 @@ public class Main {
 
     private static void maintainCategory(Category chosenCategory) {
         displayCategoryContent(chosenCategory);
-        displayChoices("1 = Modify Budget", "2 = Add Expense", "3 = Reset Balance");
+        displayChoices("1 = Modify Budget", "2 = Add Expense", "3 = Reset Balance", "");
 
         Scanner input = new Scanner(System.in);
         int userChoice = input.nextInt();

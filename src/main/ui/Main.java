@@ -214,6 +214,7 @@ public class Main {
         maintainCategory(chosenCategory);
 
     }
+
     /*
      * REQUIRES: chosen category must exist
      * MODIFIES: chosenCategory

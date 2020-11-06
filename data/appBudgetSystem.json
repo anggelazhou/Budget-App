@@ -1,27 +1,27 @@
 {
-    "name": "b1",
+    "name": "B1",
     "categories": [
         {
-            "balance": 92,
+            "balance": 15,
             "name": "food",
-            "budget": 100,
+            "budget": 20,
             "expenses": [
                 {
-                    "amount": 6,
+                    "amount": 4,
                     "description": "burger"
                 },
                 {
-                    "amount": 2,
+                    "amount": 1,
                     "description": "drink"
                 }
             ]
         },
         {
-            "balance": 69,
+            "balance": 70,
             "name": "car",
-            "budget": 167,
+            "budget": 100,
             "expenses": [{
-                "amount": 98,
+                "amount": 30,
                 "description": "gas"
             }]
         }

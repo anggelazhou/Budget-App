@@ -13,6 +13,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
     private Category category;
     private JLabel lblBalance;
     private JLabel lblBudget;
+    private JComponent content;
 
     public SelectCategoryPopUpGUI(MainGUI owner, Category category) {
         super(owner, category.getName(), true);
@@ -46,7 +47,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
         add(info, BorderLayout.PAGE_START);
 
         // Content
-        JScrollPane content = setUpCategoryContentTable();
+        content = setUpCategoryContentTable();
         add(content, BorderLayout.CENTER);
         content.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 50));
 
@@ -99,14 +100,20 @@ public class SelectCategoryPopUpGUI extends JDialog {
     }
 
     // EFFECTS: sets up expense table
-    private JScrollPane setUpCategoryContentTable() {
+    private JComponent setUpCategoryContentTable() {
         String[] columnNames = {"#", "Description", "Amount ($)"};
 
         Object[][] data = buildTableData();
 
-        JTable expensesTable = new JTable(data, columnNames);
+        // deal with 0 expenses case
+        if (data.length == 0) {
+            return new JLabel("No expenses yet!");
 
-        return new JScrollPane(expensesTable);
+        } else {
+            JTable expensesTable = new JTable(data, columnNames);
+
+            return new JScrollPane(expensesTable);
+        }
     }
 
     // EFFECTS: sets up data for expense table
@@ -155,7 +162,6 @@ public class SelectCategoryPopUpGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 category.getExpenses().clear();
-
                 refreshBalanceAndExpenseTable();
             }
         };
@@ -167,7 +173,8 @@ public class SelectCategoryPopUpGUI extends JDialog {
         lblBalance.setText("Balance: " + category.calculateBalance());
 
         // refresh expenses table
-        JScrollPane content = setUpCategoryContentTable();
+        remove(content);
+        content = setUpCategoryContentTable();
         add(content, BorderLayout.CENTER);
     }
 

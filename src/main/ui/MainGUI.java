@@ -27,12 +27,17 @@ public class MainGUI extends JFrame {
         new MainGUI();
     }
 
+    // MODIFIES: this
+    // EFFECTS:  sets budgetSystem to null, and creates border layout for name, content and exit button panel
+    //           this method is called by the MainGUI constructor
     private void initializeGraphics() {
         budgetSystem = prepareBudgetSystem();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setSize(new Dimension(800, 600));
         theme = new ThemeUI();
+
         setLayout(new BorderLayout(10, 10));
         add(createBudgetSystemNamePanel(), BorderLayout.PAGE_START);
         add(createBudgetSystemContentPanel(), BorderLayout.CENTER);
@@ -40,20 +45,15 @@ public class MainGUI extends JFrame {
         setVisible(true);
     }
 
-    // TEMPORARY, FOR DESIGN PURPOSES
+    // EFFECTS: creates new empty budget system with given name
     private BudgetSystem prepareBudgetSystem() {
-        // TODO: delete below
         String budgetSystemName = JOptionPane.showInputDialog("Name of Budget System: ");
         BudgetSystem ret = new BudgetSystem(budgetSystemName);
-//        Category food = new Category("food", 120.0);
-//        Expense burger = new Expense("burger", 6.0);
-//        food.addExpense(burger);
-//        ret.addCategory(food);
-//        Category car = new Category("car", 400.0);
-//        ret.addCategory(car);
         return ret;
     }
 
+    // EFFECTS: creates budget system name panel, which includes a budget system's name label
+    // and add category button
     private JPanel createBudgetSystemNamePanel() {
         JPanel ret = new JPanel();
         ret.setBorder(theme.emptyBorder());
@@ -76,6 +76,7 @@ public class MainGUI extends JFrame {
         return ret;
     }
 
+    // EFFECTS: opens add category pop up
     private ActionListener openAddCategoryPopUp() {
 
         return new ActionListener() {
@@ -87,6 +88,8 @@ public class MainGUI extends JFrame {
         };
     }
 
+    // EFFECTS: creates budget system content panel, which includes categories and
+    // their corresponding balance and budget
     private JScrollPane createBudgetSystemContentPanel() {
         budgetSystemContentPanel = new JPanel();
         budgetSystemContentPanel.setBorder(theme.emptyBorder());
@@ -96,6 +99,7 @@ public class MainGUI extends JFrame {
         return new JScrollPane(budgetSystemContentPanel);
     }
 
+    // EFFECTS: refreshes budget system content panel to display changes (if any were made)
     public void refreshBudgetSystemContentPanel() {
         budgetSystemContentPanel.removeAll();
 
@@ -115,10 +119,13 @@ public class MainGUI extends JFrame {
             }
         }
 
-        //force to redisplay
+        // force to redisplay
         budgetSystemContentPanel.revalidate();
     }
 
+    // EFFECTS: creates budget system exit panels, which includes w buttons:
+    //      1. load previous budget system
+    //      2. exit
     private JPanel createBudgetSystemExit() {
 
         JPanel ret = new JPanel();
@@ -138,6 +145,7 @@ public class MainGUI extends JFrame {
         return ret;
     }
 
+    // EFFECTS: loads previous budget system
     private ActionListener btnLoadPreviousBudgetSystemActionListener() {
         return new ActionListener() {
             @Override
@@ -153,6 +161,7 @@ public class MainGUI extends JFrame {
         };
     }
 
+    // EFFECTS: creates pop up asking if user would like to save, then saves if necessary and exits
     private ActionListener btnExitBudgetSystemActionListener() {
         return new ActionListener() {
             @Override
@@ -175,6 +184,7 @@ public class MainGUI extends JFrame {
         };
     }
 
+    // EFFECTS: saves budget system
     private void saveToFile() {
         JsonWriter writer = new JsonWriter("./data/appBudgetSystem.json");
         try {
@@ -186,10 +196,12 @@ public class MainGUI extends JFrame {
         }
     }
 
+    // EFFECTS: gets budget system
     public BudgetSystem getBudgetSystem() {
         return budgetSystem;
     }
 
+    // EFFECTS: gets theme
     public ThemeUI getTheme() {
         return theme;
     }

@@ -22,6 +22,9 @@ public class SelectCategoryPopUpGUI extends JDialog {
         initializeGraphics();
     }
 
+    // MODIFIES: this
+    // EFFECTS: centres pop up on middle of budget system window
+    // this method is called by the SelectCategoryPopUpGUI constructor
     private void centrePopUp(JFrame owner) {
         final int w = 600;
         final int h = 400;
@@ -32,6 +35,9 @@ public class SelectCategoryPopUpGUI extends JDialog {
         setLocation(posX, posY);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates border layout for title, content and button panel
+    // this method is called by the SelectCategoryPopUpGUI constructor
     public void initializeGraphics() {
         setLayout(new BorderLayout(10, 10));
 
@@ -49,6 +55,8 @@ public class SelectCategoryPopUpGUI extends JDialog {
         add(buttons, BorderLayout.PAGE_END);
     }
 
+    // EFFECTS: creates category info panel, including a label of the category name, as well as the category details
+    // (which is another panel created through a helper method)
     private JPanel setUpCategoryInfoPanel() {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
@@ -64,6 +72,8 @@ public class SelectCategoryPopUpGUI extends JDialog {
         return infoPanel;
     }
 
+    // EFFECTS: creates category details panel, which includes a label of the category's balance and budget,
+    // as well as an add expense button
     private JPanel setUpCategoryDetailsPanel() {
         JPanel detailPanel = new JPanel();
         detailPanel.setLayout(new GridLayout(3, 1));
@@ -88,6 +98,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
 
     }
 
+    // EFFECTS: sets up expense table
     private JScrollPane setUpCategoryContentTable() {
         String[] columnNames = {"#", "Description", "Amount ($)"};
 
@@ -98,6 +109,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
         return new JScrollPane(expensesTable);
     }
 
+    // EFFECTS: sets up data for expense table
     private Object[][] buildTableData() {
         Object[][] data = new Object[category.getExpenses().size()][];
 
@@ -111,6 +123,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
         return data;
     }
 
+    // EFFECTS: sets up button panel, including a reset balance, modify budget and close button
     private JPanel setUpButtons() {
         JPanel btnPanel = new JPanel();
         btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -136,6 +149,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
         return btnPanel;
     }
 
+    // EFFECTS: clears all expenses of category, which also resets balance
     private ActionListener resetBalanceActionListener() {
         return new ActionListener() {
             @Override
@@ -147,6 +161,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
         };
     }
 
+    // EFFECTS: refreshes balance and expense table to display changes (if any were made)
     public void refreshBalanceAndExpenseTable() {
         // refresh balance
         lblBalance.setText("Balance: " + category.calculateBalance());
@@ -156,6 +171,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
         add(content, BorderLayout.CENTER);
     }
 
+    // EFFECTS: changes budget of category to new given budget
     private ActionListener modifyBudgetActionListener() {
         return new ActionListener() {
             @Override
@@ -170,11 +186,11 @@ public class SelectCategoryPopUpGUI extends JDialog {
                     // refresh balance
                     lblBalance.setText("Balance: " + category.calculateBalance());
                 }
-
             }
         };
     }
 
+    // EFFECTS: closes current pop up (of selected category)
     private ActionListener closeListener() {
         return new ActionListener() {
             @Override
@@ -185,6 +201,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
         };
     }
 
+    // EFFECTS: opens add expense pop up
     private ActionListener openAddExpensePopUp() {
         return new ActionListener() {
             @Override
@@ -195,6 +212,7 @@ public class SelectCategoryPopUpGUI extends JDialog {
         };
     }
 
+    // EFFECTS: gets category
     public Category getCategory() {
         return category;
     }

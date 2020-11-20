@@ -18,6 +18,9 @@ public abstract class AddPopUpGUI extends JDialog {
         initializeGraphics();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates border layout for title, content and button panel
+    // this method is called by the AddPopUpGUI constructor
     private void initializeGraphics() {
         setLayout(new BorderLayout(10, 10));
 
@@ -39,6 +42,8 @@ public abstract class AddPopUpGUI extends JDialog {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: centres pop up in centre of previous window
     private void centrePopUp(JFrame owner) {
         final int w = 400;
         final int h = 180;
@@ -49,6 +54,8 @@ public abstract class AddPopUpGUI extends JDialog {
         setLocation(posX, posY);
     }
 
+    // EFFECTS: sets up content panel, including two labels (name/budget OR description/amount depending out output
+    // from helper method), as well as two text fields
     private JPanel setUpContentPanel() {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(2, 2, 0, 10));
@@ -73,6 +80,8 @@ public abstract class AddPopUpGUI extends JDialog {
         return contentPanel;
     }
 
+    // EFFECTS: set up buttons panel, including cancel and add expense or category button
+    // (depending on output from abstract helper method)
     private JPanel setUpButtons() {
         JPanel btnPanel = new JPanel();
         btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -92,6 +101,7 @@ public abstract class AddPopUpGUI extends JDialog {
         return btnPanel;
     }
 
+    // EFFECTS: closes pop up
     private ActionListener cancelActionListener() {
         return new ActionListener() {
             @Override
@@ -101,12 +111,16 @@ public abstract class AddPopUpGUI extends JDialog {
         };
     }
 
+    // EFFECTS: gets pop up type, which then determines pop up name
     protected abstract String getPopUpType();
 
+    // EFFECTS: gets first label
     protected abstract String getLabel1Text();
 
+    // EFFECTS: gets second label
     protected abstract String getLabel2Text();
 
+    // EFFECTS: adds (category or expense) to list
     protected abstract ActionListener addPopUpTypeListener();
 
 }

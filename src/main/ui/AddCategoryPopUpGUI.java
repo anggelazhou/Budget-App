@@ -14,21 +14,25 @@ public class AddCategoryPopUpGUI extends AddPopUpGUI {
         this.mainGUI = mainGUI;
     }
 
+    // EFFECTS: gets pop up type of "Add Category"
     @Override
     protected String getPopUpType() {
         return "Add Category";
     }
 
+    // EFFECTS: gets first label string
     @Override
     protected String getLabel1Text() {
         return "Name: ";
     }
 
+    // EFFECTS: gets second label string
     @Override
     protected String getLabel2Text() {
         return "Budget: ";
     }
 
+    // EFFECTS: adds category to budget system and refreshes content panel accordingly
     @Override
     protected ActionListener addPopUpTypeListener() {
         return new ActionListener() {

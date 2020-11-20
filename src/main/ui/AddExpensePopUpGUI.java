@@ -14,21 +14,25 @@ public class AddExpensePopUpGUI extends AddPopUpGUI {
         this.categoryPopUpGUI = category;
     }
 
+    // EFFECTS: gets pop up type of "Add Expense"
     @Override
     protected String getPopUpType() {
         return "Add Expense";
     }
 
+    // EFFECTS: gets first label string
     @Override
     protected String getLabel1Text() {
         return "Description: ";
     }
 
+    // EFFECTS: gets second label string
     @Override
     protected String getLabel2Text() {
         return "Amount: ";
     }
 
+    // EFFECTS: adds expense to category's expense list and updates balance and expense table accordingly
     @Override
     protected ActionListener addPopUpTypeListener() {
         return new ActionListener() {

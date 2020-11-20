@@ -22,6 +22,9 @@ public class CategoryPanel extends JPanel {
         initializeGraphics();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates border layout for name, content and button panel for each category
+    // this method is called by the CategoryPanel constructor
     private void initializeGraphics() {
         // Name
         JLabel lblCategoryName = new JLabel();
@@ -39,6 +42,7 @@ public class CategoryPanel extends JPanel {
         add(buttons, BorderLayout.PAGE_END);
     }
 
+    // EFFECTS: creates content panel, including a balance and budget label
     private JPanel setUpContentPanel() {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(2, 1));
@@ -58,6 +62,7 @@ public class CategoryPanel extends JPanel {
         return contentPanel;
     }
 
+    // EFFECTS: creates set up button panel, including remove and select button
     private JPanel setUpButtons() {
         JPanel btnPanel = new JPanel();
         btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -77,6 +82,7 @@ public class CategoryPanel extends JPanel {
         return btnPanel;
     }
 
+    // EFFECTS: remove category from budget system, and refreshes budget system accordingly
     private ActionListener btnRemoveCategoryActionListener() {
         return new ActionListener() {
             @Override
@@ -87,6 +93,7 @@ public class CategoryPanel extends JPanel {
         };
     }
 
+    // EFFECTS: opens details of selected category
     private ActionListener openSelectCategoryPopUpGUI() {
         return new ActionListener() {
             @Override

@@ -70,6 +70,7 @@ public class CategoryPanel extends JPanel {
         JButton btnSelectCategory = new JButton();
         btnSelectCategory.setText("Select");
         btnSelectCategory.setFont(mainGUI.getTheme().contentFont());
+        btnSelectCategory.addActionListener(openSelectCategoryPopUpGUI());
 
         btnPanel.add(btnRemoveCategory);
         btnPanel.add(btnSelectCategory);
@@ -82,6 +83,15 @@ public class CategoryPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 mainGUI.getBudgetSystem().removeCategory(category.getName());
                 mainGUI.refreshBudgetSystemContentPanel();
+            }
+        };
+    }
+
+    private ActionListener openSelectCategoryPopUpGUI() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SelectCategoryPopUpGUI(mainGUI, category).setVisible(true);
             }
         };
     }

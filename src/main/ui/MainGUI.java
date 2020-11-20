@@ -2,7 +2,7 @@ package ui;
 
 import model.BudgetSystem;
 import model.Category;
-import model.Expense;
+import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MainGUI extends JFrame {
     private BudgetSystem budgetSystem;
@@ -42,13 +43,14 @@ public class MainGUI extends JFrame {
     // TEMPORARY, FOR DESIGN PURPOSES
     private BudgetSystem prepareBudgetSystem() {
         // TODO: delete below
-        BudgetSystem ret = new BudgetSystem("November's Budget");
-        Category food = new Category("food", 120.0);
-        Expense burger = new Expense("burger", 6.0);
-        food.addExpense(burger);
-        ret.addCategory(food);
-        Category car = new Category("car", 400.0);
-        ret.addCategory(car);
+        String budgetSystemName = JOptionPane.showInputDialog("Name of Budget System: ");
+        BudgetSystem ret = new BudgetSystem(budgetSystemName);
+//        Category food = new Category("food", 120.0);
+//        Expense burger = new Expense("burger", 6.0);
+//        food.addExpense(burger);
+//        ret.addCategory(food);
+//        Category car = new Category("car", 400.0);
+//        ret.addCategory(car);
         return ret;
     }
 
@@ -97,14 +99,23 @@ public class MainGUI extends JFrame {
     public void refreshBudgetSystemContentPanel() {
         budgetSystemContentPanel.removeAll();
 
-        budgetSystemContentPanel.setLayout(new GridLayout(
-                budgetSystem.getCategories().size(), 1, 0, 30));
+        // check if no categories (ex: if user removes all categories)
+        if (budgetSystem.getCategories().size() == 0) {
+            JLabel noCategoriesLabel = new JLabel();
+            noCategoriesLabel.setText("No categories yet!");
+            noCategoriesLabel.setFont(getTheme().contentFont());
+            budgetSystemContentPanel.add(noCategoriesLabel);
+        } else {
+            budgetSystemContentPanel.setLayout(new GridLayout(
+                    budgetSystem.getCategories().size(), 1, 0, 30));
 
-        for (Category c : budgetSystem.getCategories()) {
-            CategoryPanel categoryPanel = new CategoryPanel(c, this);
-            budgetSystemContentPanel.add(categoryPanel);
+            for (Category c : budgetSystem.getCategories()) {
+                CategoryPanel categoryPanel = new CategoryPanel(c, this);
+                budgetSystemContentPanel.add(categoryPanel);
+            }
         }
 
+        //force to redisplay
         budgetSystemContentPanel.revalidate();
     }
 
@@ -128,8 +139,18 @@ public class MainGUI extends JFrame {
     }
 
     private ActionListener btnLoadPreviousBudgetSystemActionListener() {
-        // TODO
-        return null;
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JsonReader reader = new JsonReader("./data/appBudgetSystem.json");
+                try {
+                    budgetSystem = reader.read();
+                    refreshBudgetSystemContentPanel();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        };
     }
 
     private ActionListener btnExitBudgetSystemActionListener() {

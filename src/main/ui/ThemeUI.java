@@ -11,6 +11,7 @@ public class ThemeUI {
         return new Font("Serif", Font.BOLD, 20);
     }
 
+    // For all content
     public Font contentFont() {
         return new Font("Serif", Font.PLAIN, 14);
     }

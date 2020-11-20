@@ -5,14 +5,16 @@ import model.Category;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CategoryPanel extends JPanel {
     private final Category category;
-    private final ThemeUI theme;
+    private final MainGUI mainGUI;
 
-    public CategoryPanel(Category category, ThemeUI theme) {
+    public CategoryPanel(Category category, MainGUI mainGUI) {
         this.category = category;
-        this.theme = theme;
+        this.mainGUI = mainGUI;
         setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(0, 20, 0, 20),
                 BorderFactory.createEtchedBorder(EtchedBorder.LOWERED)));
@@ -24,7 +26,7 @@ public class CategoryPanel extends JPanel {
         // Name
         JLabel lblCategoryName = new JLabel();
         lblCategoryName.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 100));
-        lblCategoryName.setFont(theme.headerFont());
+        lblCategoryName.setFont(mainGUI.getTheme().headerFont());
         lblCategoryName.setText(category.getName());
         add(lblCategoryName, BorderLayout.LINE_START);
 
@@ -44,14 +46,15 @@ public class CategoryPanel extends JPanel {
 
         JLabel lblBalance = new JLabel();
         lblBalance.setText("Balance: $" + category.calculateBalance());
-        lblBalance.setFont(theme.contentFont());
+        lblBalance.setFont(mainGUI.getTheme().contentFont());
 
         JLabel lblBudget = new JLabel();
         lblBudget.setText("Budget: $" + category.getBudget());
-        lblBudget.setFont(theme.contentFont());
+        lblBudget.setFont(mainGUI.getTheme().contentFont());
 
         contentPanel.add(lblBalance);
         contentPanel.add(lblBudget);
+
         return contentPanel;
     }
 
@@ -61,15 +64,26 @@ public class CategoryPanel extends JPanel {
 
         JButton btnRemoveCategory = new JButton();
         btnRemoveCategory.setText("Remove");
-        btnRemoveCategory.setFont(theme.contentFont());
+        btnRemoveCategory.setFont(mainGUI.getTheme().contentFont());
+        btnRemoveCategory.addActionListener(btnRemoveCategoryActionListener());
 
         JButton btnSelectCategory = new JButton();
         btnSelectCategory.setText("Select");
-        btnSelectCategory.setFont(theme.contentFont());
+        btnSelectCategory.setFont(mainGUI.getTheme().contentFont());
 
         btnPanel.add(btnRemoveCategory);
         btnPanel.add(btnSelectCategory);
         return btnPanel;
+    }
+
+    private ActionListener btnRemoveCategoryActionListener() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainGUI.getBudgetSystem().removeCategory(category.getName());
+                mainGUI.refreshBudgetSystemContentPanel();
+            }
+        };
     }
 
 }

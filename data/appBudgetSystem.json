@@ -1,29 +1,26 @@
 {
-    "name": "B1",
+    "name": "November's Budget",
     "categories": [
         {
-            "balance": 15,
+            "balance": 114,
             "name": "food",
-            "budget": 20,
-            "expenses": [
-                {
-                    "amount": 4,
-                    "description": "burger"
-                },
-                {
-                    "amount": 1,
-                    "description": "drink"
-                }
-            ]
+            "budget": 120,
+            "expenses": [{
+                "amount": 6,
+                "description": "burger"
+            }]
         },
         {
-            "balance": 70,
+            "balance": 400,
             "name": "car",
-            "budget": 100,
-            "expenses": [{
-                "amount": 30,
-                "description": "gas"
-            }]
+            "budget": 400,
+            "expenses": []
+        },
+        {
+            "balance": 13,
+            "name": "jklsdf",
+            "budget": 13,
+            "expenses": []
         }
     ]
 }

@@ -41,6 +41,7 @@ public abstract class AddPopUpGUI extends JDialog {
         add(buttons, BorderLayout.PAGE_END);
 
     }
+    
 
     // MODIFIES: this
     // EFFECTS: centres pop up in centre of previous window

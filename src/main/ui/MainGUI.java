@@ -5,10 +5,14 @@ import model.Category;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -48,8 +52,7 @@ public class MainGUI extends JFrame {
     // EFFECTS: creates new empty budget system with given name
     private BudgetSystem prepareBudgetSystem() {
         String budgetSystemName = JOptionPane.showInputDialog("Name of Budget System: ");
-        BudgetSystem ret = new BudgetSystem(budgetSystemName);
-        return ret;
+        return new BudgetSystem(budgetSystemName);
     }
 
     // EFFECTS: creates budget system name panel, which includes a budget system's name label
@@ -152,6 +155,7 @@ public class MainGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JsonReader reader = new JsonReader("./data/appBudgetSystem.json");
                 try {
+                    playLoadSound("./data/loadSound.wav");
                     budgetSystem = reader.read();
                     refreshBudgetSystemContentPanel();
                 } catch (IOException ioException) {
@@ -159,6 +163,20 @@ public class MainGUI extends JFrame {
                 }
             }
         };
+    }
+
+    // EFFECTS: plays a sound
+    private void playLoadSound(String source) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                    new File(source).getAbsoluteFile( ));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            System.out.println("Error with playing sound");
+            e.printStackTrace();
+        }
     }
 
     // EFFECTS: creates pop up asking if user would like to save, then saves if necessary and exits

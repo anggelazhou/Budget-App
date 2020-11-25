@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+// Represents theme of GUI (font)
 public class ThemeUI {
 
     // EFFECTS: creates font for budget system and category name

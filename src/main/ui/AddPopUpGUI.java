@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Abstract class for add x pop ups
 public abstract class AddPopUpGUI extends JDialog {
 
     protected MainGUI mainGUI;

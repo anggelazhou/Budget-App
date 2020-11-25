@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents the select category pop up from the main panel
 public class SelectCategoryPopUpGUI extends JDialog {
 
     private MainGUI mainGUI;

@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Represents the main panel
 public class MainGUI extends JFrame {
     private BudgetSystem budgetSystem;
 

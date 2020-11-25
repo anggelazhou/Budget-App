@@ -5,6 +5,7 @@ import model.Category;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents the add category pop up from the main panel
 public class AddCategoryPopUpGUI extends AddPopUpGUI {
 
     private MainGUI mainGUI;

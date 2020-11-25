@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents the category panel within the main panel
 public class CategoryPanel extends JPanel {
     private final Category category;
     private final MainGUI mainGUI;

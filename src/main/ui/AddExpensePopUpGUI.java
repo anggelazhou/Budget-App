@@ -5,6 +5,7 @@ import model.Expense;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents the add expense pop up from the category panel
 public class AddExpensePopUpGUI extends AddPopUpGUI {
 
     private SelectCategoryPopUpGUI categoryPopUpGUI;

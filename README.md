@@ -48,4 +48,6 @@ Phase 4: Task 2
 <br>
 
 Phase 4: Task 3
-> I think it's okay
+> To make the ```SelectCategoryPopUpGUI``` more cohesive, I would refactor all methods related to the expense into a new 
+>class called ExpensePanel. This means the ```SelectCategoryPopUpGUI``` class would contain only the rendering for 
+>the category's summary, as well as the ExpensePanel class.

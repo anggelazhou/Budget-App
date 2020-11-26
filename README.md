@@ -48,7 +48,7 @@ Phase 4: Task 2
 <br>
 
 Phase 4: Task 3
->- To make the ```SelectCategoryPopUpGUI``` more cohesive, I would refactor all methods related to the expenses into a 
->new class called ExpensePanel. This means the ```SelectCategoryPopUpGUI``` class would contain only the rendering for 
->the category's summary, as well as the ExpensePanel class. This reinforces the SRP.
+>- To make the ```SelectCategoryPopUpGUI``` class more cohesive, I would refactor all methods related to the expenses 
+>into a new class called ExpensePanel. This means the ```SelectCategoryPopUpGUI``` class would contain only the 
+>rendering for the category's summary, as well as the ExpensePanel class. This reinforces the SRP.
 >- Overall, I think it is ok.

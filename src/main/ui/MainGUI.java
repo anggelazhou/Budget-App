@@ -166,11 +166,11 @@ public class MainGUI extends JFrame {
         };
     }
 
-    // EFFECTS: plays a sound
+    // EFFECTS: plays a sound from source
     private void playLoadSound(String source) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                    new File(source).getAbsoluteFile( ));
+                    new File(source).getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
